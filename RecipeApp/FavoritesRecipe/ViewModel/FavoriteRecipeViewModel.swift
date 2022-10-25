@@ -11,7 +11,7 @@ final class FavoriteRecipeViewModel {
     
     // MARK: - Properties
     private(set) var recipeDetailList: [RecipeDetail]
-    private(set) var position: Int = 0
+    var position: Int = 0
     
     weak var delegate: FavoriteRecipeViewControllerDelegate?
     

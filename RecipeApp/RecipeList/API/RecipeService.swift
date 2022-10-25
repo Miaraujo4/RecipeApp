@@ -14,7 +14,7 @@ protocol RecipeServiceProtocol {
 
 final class RecipeService: RecipeServiceProtocol {
     
-    let token: String = "ded62405c2e0467e945672876cfaf1ea"
+    let token: String = "19211dce3d4d4fcc94bc03d44bd854a6"
     var recipeInfoList: [RecipeDetail] = [RecipeDetail]()
     
     func getRecipeList(recipeName: String, completionHandler: @escaping(Result<[RecipeDetail], ErrorRequest>) -> Void) {

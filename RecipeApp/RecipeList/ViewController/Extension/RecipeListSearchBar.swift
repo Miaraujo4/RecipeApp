@@ -20,5 +20,6 @@ extension RecipeListViewController {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         viewModel.searchRecipe(recipeName: searchBar.text)
+        searchBar.endEditing(true)
     }
 }

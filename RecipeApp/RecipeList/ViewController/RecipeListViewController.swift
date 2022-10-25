@@ -17,7 +17,7 @@ final class RecipeListViewController: UIViewController, UISearchBarDelegate {
     
     // MARK: - Private Properties
     private(set) var recipeView: RecipeListView = RecipeListView()
-    private var searchBar: UISearchBar?
+    private(set) var searchBar: UISearchBar?
     private(set) var viewModel: RecipeListViewModel = RecipeListViewModel()
     
     

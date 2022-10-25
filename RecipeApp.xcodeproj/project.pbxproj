@@ -26,6 +26,11 @@
 		1190D2A1290789A000C0CCD9 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1190D2A0290789A000C0CCD9 /* SplashViewController.swift */; };
 		1190D2A529078C8400C0CCD9 /* foodCarousel.json in Resources */ = {isa = PBXBuildFile; fileRef = 1190D2A429078C8400C0CCD9 /* foodCarousel.json */; };
 		1190D2A729078EFB00C0CCD9 /* RecipeListSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1190D2A629078EFB00C0CCD9 /* RecipeListSearchBar.swift */; };
+		1190D2AD2907AFBA00C0CCD9 /* RecipeServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1190D2AC2907AFBA00C0CCD9 /* RecipeServiceMock.swift */; };
+		1190D2B22907B1D900C0CCD9 /* RecipeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1190D2B12907B1D900C0CCD9 /* RecipeDetail.swift */; };
+		1190D2B42907B30900C0CCD9 /* RecipeListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1190D2B32907B30900C0CCD9 /* RecipeListViewModelTest.swift */; };
+		1190D2B92907B8A300C0CCD9 /* DetailRecipeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1190D2B82907B8A300C0CCD9 /* DetailRecipeViewModelTest.swift */; };
+		1190D2BB2907B96D00C0CCD9 /* FavoriteRecipeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1190D2BA2907B96D00C0CCD9 /* FavoriteRecipeViewModelTest.swift */; };
 		11DE52DD290487FB00CD1CF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE52DC290487FB00CD1CF1 /* AppDelegate.swift */; };
 		11DE52DF290487FB00CD1CF1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE52DE290487FB00CD1CF1 /* SceneDelegate.swift */; };
 		11DE52E1290487FB00CD1CF1 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE52E0290487FB00CD1CF1 /* RecipeListViewController.swift */; };
@@ -78,6 +83,11 @@
 		1190D2A0290789A000C0CCD9 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		1190D2A429078C8400C0CCD9 /* foodCarousel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = foodCarousel.json; sourceTree = "<group>"; };
 		1190D2A629078EFB00C0CCD9 /* RecipeListSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListSearchBar.swift; sourceTree = "<group>"; };
+		1190D2AC2907AFBA00C0CCD9 /* RecipeServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeServiceMock.swift; sourceTree = "<group>"; };
+		1190D2B12907B1D900C0CCD9 /* RecipeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetail.swift; sourceTree = "<group>"; };
+		1190D2B32907B30900C0CCD9 /* RecipeListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModelTest.swift; sourceTree = "<group>"; };
+		1190D2B82907B8A300C0CCD9 /* DetailRecipeViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecipeViewModelTest.swift; sourceTree = "<group>"; };
+		1190D2BA2907B96D00C0CCD9 /* FavoriteRecipeViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipeViewModelTest.swift; sourceTree = "<group>"; };
 		11DE52D9290487FB00CD1CF1 /* RecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11DE52DC290487FB00CD1CF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11DE52DE290487FB00CD1CF1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -281,6 +291,9 @@
 		1190D2A82907AEDC00C0CCD9 /* RecipeList */ = {
 			isa = PBXGroup;
 			children = (
+				1190D2B52907B31900C0CCD9 /* ViewModel */,
+				1190D2AE2907AFDC00C0CCD9 /* Model */,
+				1190D2AB2907AFAB00C0CCD9 /* API */,
 			);
 			path = RecipeList;
 			sourceTree = "<group>";
@@ -288,6 +301,7 @@
 		1190D2A92907AEEF00C0CCD9 /* DetailRecipe */ = {
 			isa = PBXGroup;
 			children = (
+				1190D2B82907B8A300C0CCD9 /* DetailRecipeViewModelTest.swift */,
 			);
 			path = DetailRecipe;
 			sourceTree = "<group>";
@@ -295,8 +309,41 @@
 		1190D2AA2907AF0200C0CCD9 /* FavoriteRecipe */ = {
 			isa = PBXGroup;
 			children = (
+				1190D2BA2907B96D00C0CCD9 /* FavoriteRecipeViewModelTest.swift */,
 			);
 			path = FavoriteRecipe;
+			sourceTree = "<group>";
+		};
+		1190D2AB2907AFAB00C0CCD9 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1190D2AC2907AFBA00C0CCD9 /* RecipeServiceMock.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		1190D2AE2907AFDC00C0CCD9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1190D2B12907B1D900C0CCD9 /* RecipeDetail.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1190D2B52907B31900C0CCD9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1190D2B32907B30900C0CCD9 /* RecipeListViewModelTest.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1190D2BC29083A0F00C0CCD9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1190D2A629078EFB00C0CCD9 /* RecipeListSearchBar.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		11DE52D0290487FB00CD1CF1 = {
@@ -383,7 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				11DE52E0290487FB00CD1CF1 /* RecipeListViewController.swift */,
-				1190D2A629078EFB00C0CCD9 /* RecipeListSearchBar.swift */,
+				1190D2BC29083A0F00C0CCD9 /* Extension */,
 				116C5EA729060AD4009595F6 /* Delegate */,
 				116C5EA629060ACE009595F6 /* DataSource */,
 			);
@@ -588,6 +635,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1190D2B92907B8A300C0CCD9 /* DetailRecipeViewModelTest.swift in Sources */,
+				1190D2B22907B1D900C0CCD9 /* RecipeDetail.swift in Sources */,
+				1190D2BB2907B96D00C0CCD9 /* FavoriteRecipeViewModelTest.swift in Sources */,
+				1190D2AD2907AFBA00C0CCD9 /* RecipeServiceMock.swift in Sources */,
+				1190D2B42907B30900C0CCD9 /* RecipeListViewModelTest.swift in Sources */,
 				11DE52F4290487FC00CD1CF1 /* RecipeAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,7 +18,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <accessibility key="accessibilityConfiguration">
-                            <accessibilityTraits key="traits" keyboardKey="YES"/>
+                            <accessibilityTraits key="traits" keyboardKey="YES" searchField="YES"/>
                         </accessibility>
                     </view>
                 </viewController>
