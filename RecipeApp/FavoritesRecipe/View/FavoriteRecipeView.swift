@@ -60,8 +60,11 @@ final class FavoriteRecipeView: UIView {
     }
     
     // MARK: - Functions
-    func setViewModel() {
+    func setViewModel(viewModel: FavoriteRecipeViewModel) {
+        dataSource.viewModel = viewModel
+        delegate.viewModel = viewModel
         favoriteRecipeCollection.dataSource = dataSource
         favoriteRecipeCollection.delegate = delegate
+        favoriteRecipeCollection.reloadData()
     }
 }

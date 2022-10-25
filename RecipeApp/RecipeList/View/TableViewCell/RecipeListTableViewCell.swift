@@ -14,21 +14,20 @@ final class RecipeListTableViewCell: UITableViewCell {
     static let cellIdentifier: String = "recipeCell"
     
     // MARK: - Private Properties
-    private var isFavorite : Bool = false
+    private var position: Int = 0
     private var viewModel: RecipeListViewModel?
     
     // MARK: - Private UI Properties
     private var recipeImage: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 8
+        image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
-    private var favoriteImage: UIButton = {
+    private var favoriteButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "heart"), for: .normal)
-        button.addTarget(self, action: #selector(favoriteButtonPressed(sender:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -60,11 +59,10 @@ final class RecipeListTableViewCell: UITableViewCell {
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        accessoryView = favoriteImage
-        favoriteImage.tintColor = .red
         self.backgroundColor = UIColor(red: 0.95, green: 0.84, blue: 0.85, alpha: 1.00)
         setHierarchy()
         setContraint()
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonPressed), for: .touchDown)
     }
     
     @available(*, unavailable)
@@ -74,30 +72,25 @@ final class RecipeListTableViewCell: UITableViewCell {
     
     // MARK: - Private Functions
     private func setHierarchy() {
-        self.addSubview(containerView)
+        contentView.addSubview(containerView)
         containerView.addSubview(recipeImage)
         containerView.addSubview(recipeDescription)
-        containerView.addSubview(favoriteImage)
         containerView.addSubview(detailLabel)
+        containerView.addSubview(favoriteButton)
     }
     
     private func setContraint() {
         NSLayoutConstraint.activate([
             
-            containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-            containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             
             recipeImage.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 5),
             recipeImage.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             recipeImage.heightAnchor.constraint(equalToConstant: 130),
             recipeImage.widthAnchor.constraint(equalToConstant: 210),
-            
-            favoriteImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            favoriteImage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25),
-            favoriteImage.heightAnchor.constraint(equalToConstant: 25),
-            favoriteImage.widthAnchor.constraint(equalToConstant: 25),
             
             detailLabel.topAnchor.constraint(equalTo: recipeDescription.bottomAnchor, constant: 5),
             detailLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
@@ -106,18 +99,26 @@ final class RecipeListTableViewCell: UITableViewCell {
             recipeDescription.topAnchor.constraint(equalTo: recipeImage.bottomAnchor, constant: 10),
             recipeDescription.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             recipeDescription.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            
+            favoriteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 25),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 25)
         ])
     }
     
     // MARK: - Functions
-    func setViewModel(viewModel: RecipeListViewModel) {
+    func setViewModel(viewModel: RecipeListViewModel, position: Int) {
+        self.position = position
         self.viewModel = viewModel
+        recipeDescription.text = viewModel.recipeName
+        recipeImage.load(url: viewModel.recipeImage)
+        favoriteButton.setImage(UIImage(named: viewModel.favoriteImage), for: .normal)
     }
     
     @objc
-    func favoriteButtonPressed(sender: UIButton) {
-        isFavorite = !isFavorite
-        favoriteImage.setImage(UIImage(named: isFavorite ? "heart" : "heartFill"), for: .normal)
-        
+    func favoriteButtonPressed() {
+        let favoriteImag: String = viewModel?.setRecipeAsFavorite(position: position) ?? "heart"
+        favoriteButton.setImage(UIImage(named: favoriteImag), for: .normal)
     }
 }

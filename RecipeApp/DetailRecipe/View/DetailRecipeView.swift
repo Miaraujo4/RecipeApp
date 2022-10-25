@@ -15,13 +15,14 @@ final class DetailRecipeView: UIView {
         let image: UIImageView = UIImageView()
         image.backgroundColor = UIColor(red: 0.83, green: 0.81, blue: 0.87, alpha: 1.00)
         image.layer.cornerRadius = 8
+        image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
     private var nameDetailRecipe: UILabel = {
         let label: UILabel = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.font = UIFont.boldSystemFont(ofSize: 25)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -34,6 +35,14 @@ final class DetailRecipeView: UIView {
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    private lazy var scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.showsVerticalScrollIndicator = true
+        view.alwaysBounceVertical = true
+        return view
     }()
     
     // MARK: - Init
@@ -51,25 +60,40 @@ final class DetailRecipeView: UIView {
     
     // MARK: - Private Functions
     private func setHierarchy() {
+        self.addSubview(scrollView)
         [imageDetailRecipe, nameDetailRecipe,
          descripcionDetailRecipe].forEach { view in
-            self.addSubview(view)
+            scrollView.addSubview(view)
         }
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            imageDetailRecipe.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
+            imageDetailRecipe.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
             imageDetailRecipe.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             imageDetailRecipe.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             imageDetailRecipe.heightAnchor.constraint(equalToConstant: 200),
             
             nameDetailRecipe.topAnchor.constraint(equalTo: imageDetailRecipe.bottomAnchor, constant: 40),
-            nameDetailRecipe.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            nameDetailRecipe.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            nameDetailRecipe.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
 
             descripcionDetailRecipe.topAnchor.constraint(equalTo: nameDetailRecipe.bottomAnchor, constant: 20),
             descripcionDetailRecipe.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             descripcionDetailRecipe.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -90),
+            descripcionDetailRecipe.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10),
         ])
+    }
+    
+    // MARK: - Private Functions
+    func setViewModel(viewModel: DetailRecipeViewModel) {
+        imageDetailRecipe.load(url: viewModel.imageRecipe)
+        descripcionDetailRecipe.text = viewModel.descriptionRecipe
+        nameDetailRecipe.text = viewModel.nameRecipe
     }
 }
