@@ -74,5 +74,13 @@ final class FavoriteRecipeCollection: UICollectionViewCell {
             recipeDescription.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10)
         ])
     }
+    
+    // MARK: - Functions
+    func setViewModel(viewModel: FavoriteRecipeViewModel) {
+        recipeImage.load(url: viewModel.imageRecipe)
+        recipeDescription.text = viewModel.nameRecipe
+        
+    }
+
 }
 

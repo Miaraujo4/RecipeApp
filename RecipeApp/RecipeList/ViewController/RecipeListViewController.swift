@@ -7,17 +7,19 @@
 
 import UIKit
 
-protocol GoToNextScreen: AnyObject {
-    func goToDetailSection()
-    func goToFavoriteSection()
+protocol RecipeListViewControllerDelegate: AnyObject {
+    func recipesLoaded()
+    func goToDetailSection(recipeDetail: RecipeDetail)
+    func goToFavoriteSection(favoriteRecipe: [RecipeDetail])
 }
 
 final class RecipeListViewController: UIViewController, UISearchBarDelegate {
     
     // MARK: - Private Properties
-    private var recipeView: RecipeListView = RecipeListView()
+    private(set) var recipeView: RecipeListView = RecipeListView()
     private var searchBar: UISearchBar?
-    private var viewModel: RecipeListViewModel = RecipeListViewModel()
+    private(set) var viewModel: RecipeListViewModel = RecipeListViewModel()
+    
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -26,21 +28,26 @@ final class RecipeListViewController: UIViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.getRecipeList()
         recipeView.setViewModel(viewModel: viewModel)
         viewModel.delegate = self
         configNavigation()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.setHidesBackButton(true, animated: true)
+    }
+    
     // MARK: - Functions
     func configNavigation() {
-        self.navigationController?.navigationBar.barTintColor = .black
-        self.navigationController?.navigationBar.backgroundColor = .black
-        self.navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.tintColor = .white
         self.navigationItem.title = "Lista de Recetas"
+        configureSearchBarButton()
+    }
+    
+    func configureSearchBarButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearchBar))
-        navigationItem.rightBarButtonItem?.tintColor = .white
+        navigationItem.rightBarButtonItem?.tintColor = .black
     }
     
     @objc
@@ -50,7 +57,7 @@ final class RecipeListViewController: UIViewController, UISearchBarDelegate {
         searchBar?.sizeToFit()
         searchBar?.showsCancelButton = true
         searchBar?.becomeFirstResponder()
-        searchBar?.tintColor = .white
+        searchBar?.tintColor = .black
         
         navigationItem.rightBarButtonItem = nil
         navigationItem.titleView = searchBar
@@ -58,15 +65,22 @@ final class RecipeListViewController: UIViewController, UISearchBarDelegate {
     
 }
 
-extension RecipeListViewController: GoToNextScreen {
+extension RecipeListViewController: RecipeListViewControllerDelegate {
     
-    func goToDetailSection() {
-        navigationController?.pushViewController(DetailRecipeViewController(), animated: true)
+    func goToDetailSection(recipeDetail: RecipeDetail) {
+        let viewModel = DetailRecipeViewModel(recipeDetailList: recipeDetail)
+        let detailViewController: DetailRecipeViewController = DetailRecipeViewController(viewModel: viewModel)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
     
-    func goToFavoriteSection() {
-        let favoriteRecipeViewController: FavoriteRecipeViewController = FavoriteRecipeViewController()
+    func goToFavoriteSection(favoriteRecipe: [RecipeDetail]) {
+        let viewModel = FavoriteRecipeViewModel(recipeDetailList: favoriteRecipe)
+        let favoriteRecipeViewController: FavoriteRecipeViewController = FavoriteRecipeViewController(viewModel: viewModel)
         navigationController?.pushViewController(favoriteRecipeViewController, animated: true)
+    }
+    
+    func recipesLoaded() {
+        recipeView.updateRecipeList()
     }
 }
 

@@ -51,10 +51,15 @@ final class RecipeListView: UIView {
     }
     
     // MARK: - Functions
-     func setViewModel(viewModel: RecipeListViewModel) {
+    func setViewModel(viewModel: RecipeListViewModel) {
         delegate.viewModel = viewModel
         dataSource.viewModel = viewModel
         recipeList.dataSource = dataSource
         recipeList.delegate = delegate
+        recipeList.reloadData()
+    }
+    
+    func updateRecipeList() {
+        recipeList.reloadData()
     }
 }
