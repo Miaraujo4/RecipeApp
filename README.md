@@ -5,4 +5,4 @@
 
 
 ## App description
-* This application is a recipe app that list and show detail recipes (how to prepare), also you can salve your favorite recipes.
+* This application is a recipe app that list and show detail recipes (how to prepare), also you can save your favorite recipes.
